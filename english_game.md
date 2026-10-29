@@ -1,0 +1,2 @@
+# Simple english pygame prod1 :
+This is a pygame dev project . Its a simple english game that teachers the user through his inputs which word are used depending on contecxt and common spelling errors.w
