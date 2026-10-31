@@ -42,6 +42,52 @@ while running:
 # 1. What would happen if we put running = False outside the if event.type == pygame.QUIT condition but inside the while loop?
 # 2. What's the difference between the while loop and the for event loop?
 # 3. If we draw a red rectangle onto the screen but never call pygame.display.flip(), what would happen to the visible display?
+# Don't Google these. Reason the# #Every iteration of the while loop:
+# 1. Checks for pending events.
+# 2. Processes those events.
+# 3. Updates game information.
+# 4. Refreshes the display.
+# 5. Starts another iteration.
+# Here's the important distinction:
+
+# The while loop repeats the entire game cycle.
+
+# The for loop only processes the events waiting in the event queue.
+
+# That's why we separate them.
+# Let's make this practical
+# Imagine your game has a cartoon character that changes its expression every time the player answers correctly.
+
+# Even if the player doesn't touch anything, your game still needs to display the current character expression.
+
+# If display updating were dependent on receiving an event, your rendering would be unnecessarily tied to user interaction.
+# Mini challenge: Lesson 1 checkpoint
+# Before Lesson 2, answer these three questions:
+# 1. What would happen if we put running = False outside the if event.type == pygame.QUIT condition but inside the while loop?
+# 2. What's the difference between the while loop and the for event loop?
+# 3. If we draw a red rectangle onto the screen but never call pygame.display.flip(), what would happen to the visible display?
 # Don't Google these. Reason them out.
 
+# Then we'll tackle Lesson 2: Events, keyboard input and mouse input. This is where your quiz starts becoming interactive.m out.
+
 # Then we'll tackle Lesson 2:
+
+
+
+
+master :
+    1.hnandle input 
+    2.update game info
+    3.draw everything >>> display flip
+    4.refresh display
+
+
+
+
+events ===is handling inputs from keys and using a mouse 
+
+THERE ARE TWO TYPES OF MAIN EVENTS THATS MOUSEBUTTOWN DOWN AND KEYSDOWN
+        1.after using the loop to get events occuring on surface .... we use
+        2. event.type can either be : KEYDOWN (pressing of keys ) or MOUSEBUTTONDOWN
+
+THEN TO GET TEH SPECIFIC KEY TYPES TO BE USED 
