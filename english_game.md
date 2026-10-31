@@ -90,4 +90,41 @@ THERE ARE TWO TYPES OF MAIN EVENTS THATS MOUSEBUTTOWN DOWN AND KEYSDOWN
         1.after using the loop to get events occuring on surface .... we use
         2. event.type can either be : KEYDOWN (pressing of keys ) or MOUSEBUTTONDOWN
 
-THEN TO GET TEH SPECIFIC KEY TYPES TO BE USED 
+THEN TO GET TEH SPECIFIC KEY TYPES TO BE USED we thn use #event.key 
+BUT TO GET THE MOUSE BUTTON CLICKED WE THEN USE : event_button
+
+for event.key -- K_DOWN , K_UP , K_LEFT , K_RIGHT 
+
+for event.button --  1(left click) , 2 (middle click) , 3(right click) , 4(scroll wheel up)  5, (scroll wheel down)
+
+
+but then remember that thats only the keys for the mouse what about the mouse position..... pygame then privides us with >>> event.pos
+
+
+
+DRAWING SURFACES 
+when drawing it is good to keep the values of the surfaces to be drawn outside the loop for easier referencing 
+
+so rectancle = pygame.rect(x-axis , y-axis , width , height)
+        >> note : width == 0   .... leads to filling the rect
+        >> note : width > 0 used for line thickness
+        >> note : width < 0 draws nothing
+
+drawing polygons : pygame.polygons(screen , colour , points , width)
+drawing circles : pygame.draw.circle(screen , colour , (x-axis , y-axis ) , radius)
+drawing lines : pygame.draw.line(screen , colour , staring_point , ending_point)
+etc 
+
+
+
+rendering text messages
+
+we need to make a font :
+>>>> pygame.font.Font(type of font , size)
+>>>> type of font is passsed as a file string ..... no native pygame fonts
+>>>this creates the font that will be used for any text wanting to be rendered
+
+rendering the text:
+    text = font.render('*desired text*' , antialiasing(input boolean) , colour)
+    this creates a new surface rendering the text
+    but the text is rendered into text format now we need to find a method to place it in the screen
