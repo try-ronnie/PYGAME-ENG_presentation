@@ -7,7 +7,7 @@ pygame.init()
 DISPLAYSURF = pygame.display.set_mode((1000,1000))
 
 #creating a font
-pygame.font.Font(None , 38)
+font = pygame.font.Font(None , 38) # this returns a font object
 
 # set common colour variables 
 red = (255, 0,0)
@@ -22,15 +22,15 @@ rect2 = pygame.Rect(400,400,200,200)
 rect3 = pygame.Rect(600,400,200,200)
 
 #creating text to be rendered in the rectangles
-text1 = pygame.Font.render('answer a ' , True , green)
+text1 = font.render('answer a ' , True , green)
 text1_rect = text1.get_rect(center = rect1.center) # create the sruface on the rect????
-text2 = pygame.Font.render('answer b' , True , red)
+text2 = font.render('answer b' , True , red)
 text2_rect = text2.get_rect(center = rect2.center)
-text3 = pygame.Font.render('answer c' , True , white)
+text3 = font.render('answer c' , True , white)
 text3_rect = text3.get_rect(center = rect3.center)
     
 
-#setting the loop value 
+#setting the loop value t .
 running = True
 
 while running:
@@ -39,28 +39,28 @@ while running:
     
     
     # draw the rectangles to surface
-    r1= pygame.draw.rect(DISPLAYSURF , red , rect1)
-    r2 = pygame.draw.rect(DISPLAYSURF, blue , rect2)
-    r3 = pygame.draw.rect(DISPLAYSURF, green , rect3)
-    r4 = pygame.draw.circle(DISPLAYSURF, yellow ,(100, 600), 50)
+    pygame.draw.rect(DISPLAYSURF , red , rect1)
+    pygame.draw.rect(DISPLAYSURF, blue , rect2)
+    pygame.draw.rect(DISPLAYSURF, green , rect3)
+    pygame.draw.circle(DISPLAYSURF, yellow ,(100, 600), 50)
     
 
-    for event in pygame.event:
+    for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 if rect1.collidepoint(event.pos):
                     print('first rectangle clicked')
-                if rect2.collidepoint(event.pos):
+                elif rect2.collidepoint(event.pos):
                     print('second rectangle clicked')
-                if rect3.collidepoint(event.pos):
+                elif rect3.collidepoint(event.pos):
                     print('third rectangle clicked')
-                else :
+                else: 
                     print('somewhere else clicked')
-            if event.type == pygame.QUIT:
-                running = False
-    rect1.blit(text1_rect,)
-    DISPLAYSURF.blit(text2 , (500,500))
-    DISPLAYSURF.blit(text3 , (700,500))
+        if event.type == pygame.QUIT:
+            running = False
+    DISPLAYSURF.blit(text1 , text1_rect)
+    DISPLAYSURF.blit(text2 , text2_rect)
+    DISPLAYSURF.blit(text3 , text3_rect)
     pygame.display.flip()
     
     
