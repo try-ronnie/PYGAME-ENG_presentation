@@ -1,130 +1,254 @@
-# Simple english pygame prod1 :
-This is a pygame dev project . Its a simple english game that teachers the user through his inputs which word are used depending on contecxt and common spelling errors.w
+# ENGLIFICATION — Simple English Pygame Game
 
+A small pygame project that teaches users which words to use depending on context and common spelling errors, through user input.
 
+## Project structure
 
-import pygame ,sys
+```
+PYGAME/
+├── english_game.md          # This guide
+├── Pipfile
+└── basics/
+    ├── Game.py              # Minimal pygame window + event loop
+    ├── exe_1.py             # Rectangles + mouse click detection (collidepoint)
+    ├── text.py              # Text rendering, fonts, blitting, shapes
+    ├── rect.py              # Rect creation + keyboard and mouse events
+    ├── key_handling.py      # KEYDOWN / KEYUP arrow key handling
+    └── dsa_game_logic.py    # Questions stored as list of dictionaries
+```
 
-# initialize the programme
+## 1. Pygame basics
+
+### Initialize and create a window
+
+```python
+import pygame, sys
+
 pygame.init()
-DISPLAYSURF = pygame.display.set_mode((800 , 600))
-pygame.display.set_caption('ENGLIFICATION') # sets the window name to the desired caption 
+DISPLAYSURF = pygame.display.set_mode((800, 600))
+pygame.display.set_caption('ENGLIFICATION')
+```
 
-running = True  # variable that holds the truth 
+- `pygame.init()` — initializes all imported pygame modules.
+- `pygame.display.set_mode((width, height))` — creates the display surface.
+- `pygame.display.set_caption(title)` — sets the window title.
+
+### Colours
+
+Colours are RGB tuples:
+
+```python
+red   = (255, 0, 0)
+green = (0, 255, 0)
+blue  = (0, 0, 255)
+white = (255, 255, 255)
+yellow = (255, 255, 0)
+purple = (128, 0, 128)
+black  = (0, 0, 0)
+```
+
+## 2. The game loop
+
+Every pygame program repeats this cycle:
+
+```python
+running = True
 
 while running:
+    # 1. Handle events (input)
     for event in pygame.event.get():
-        if event.type == pygame.QUIT :
-            running =  False  #this is simpler since it will exit the loop
+        if event.type == pygame.QUIT:
+            running = False
+
+    # 2. Update game state
+    # ...
+
+    # 3. Draw everything
+    DISPLAYSURF.fill(white)          # clear the screen
+    # pygame.draw... / DISPLAYSURF.blit(...)
+
+    # 4. Refresh the display
     pygame.display.flip()
-    
-# #Every iteration of the while loop:
-# 1. Checks for pending events.
-# 2. Processes those events.
-# 3. Updates game information.
-# 4. Refreshes the display.
-# 5. Starts another iteration.
-# Here's the important distinction:
+```
 
-# The while loop repeats the entire game cycle.
+| Step | Purpose |
+|------|---------|
+| Event loop | Processes pending events from the event queue (quit, keys, mouse). |
+| Update | Changes game state (positions, scores, current question). |
+| Draw | Renders shapes, text, and images onto the surface. |
+| `flip()` | Updates the entire display surface to the screen. |
 
-# The for loop only processes the events waiting in the event queue.
+`pygame.display.flip()` must be called every frame, even when nothing changed; otherwise rendering becomes tied to user input and the screen may appear frozen.
 
-# That's why we separate them.
-# Let's make this practical
-# Imagine your game has a cartoon character that changes its expression every time the player answers correctly.
+### Event types vs input loops
 
-# Even if the player doesn't touch anything, your game still needs to display the current character expression.
+- The `while` loop repeats the **entire game cycle**.
+- The `for event in pygame.event.get()` loop only processes events **waiting in the queue**.
 
-# If display updating were dependent on receiving an event, your rendering would be unnecessarily tied to user interaction.
-# Mini challenge: Lesson 1 checkpoint
-# Before Lesson 2, answer these three questions:
-# 1. What would happen if we put running = False outside the if event.type == pygame.QUIT condition but inside the while loop?
-# 2. What's the difference between the while loop and the for event loop?
-# 3. If we draw a red rectangle onto the screen but never call pygame.display.flip(), what would happen to the visible display?
-# Don't Google these. Reason the# #Every iteration of the while loop:
-# 1. Checks for pending events.
-# 2. Processes those events.
-# 3. Updates game information.
-# 4. Refreshes the display.
-# 5. Starts another iteration.
-# Here's the important distinction:
+## 3. Events — keyboard and mouse input
 
-# The while loop repeats the entire game cycle.
+### Event types
 
-# The for loop only processes the events waiting in the event queue.
+| Event type | Meaning |
+|------------|---------|
+| `pygame.QUIT` | User closed the window. |
+| `pygame.KEYDOWN` / `pygame.KEYUP` | A key was pressed / released. |
+| `pygame.MOUSEBUTTONDOWN` | A mouse button was clicked. |
 
-# That's why we separate them.
-# Let's make this practical
-# Imagine your game has a cartoon character that changes its expression every time the player answers correctly.
+### Keyboard
 
-# Even if the player doesn't touch anything, your game still needs to display the current character expression.
+```python
+if event.type == pygame.KEYDOWN:
+    if event.key == pygame.K_DOWN:
+        print('down pressed')
+    elif event.key == pygame.K_UP:
+        print('up pressed')
+    elif event.key == pygame.K_LEFT:
+        print('left pressed')
+    elif event.key == pygame.K_RIGHT:
+        print('right pressed')
+```
 
-# If display updating were dependent on receiving an event, your rendering would be unnecessarily tied to user interaction.
-# Mini challenge: Lesson 1 checkpoint
-# Before Lesson 2, answer these three questions:
-# 1. What would happen if we put running = False outside the if event.type == pygame.QUIT condition but inside the while loop?
-# 2. What's the difference between the while loop and the for event loop?
-# 3. If we draw a red rectangle onto the screen but never call pygame.display.flip(), what would happen to the visible display?
-# Don't Google these. Reason them out.
+Arrow keys: `K_DOWN`, `K_UP`, `K_LEFT`, `K_RIGHT`.
 
-# Then we'll tackle Lesson 2: Events, keyboard input and mouse input. This is where your quiz starts becoming interactive.m out.
+### Mouse
 
-# Then we'll tackle Lesson 2:
+```python
+if event.type == pygame.MOUSEBUTTONDOWN:
+    if event.button == 1:          # left click
+        print(event.pos)           # (x, y) position of the click
+```
 
+Mouse buttons: `1` left, `2` middle, `3` right, `4` scroll up, `5` scroll down.  
+`event.pos` gives the click position as a tuple `(x, y)`.
 
+See `basics/key_handling.py` and `basics/rect.py` for working examples.
 
+## 4. Drawing shapes
 
-master :
-    1.hnandle input 
-    2.update game info
-    3.draw everything >>> display flip
-    4.refresh display
+`pygame.Rect(x, y, width, height)` defines a rectangle starting at `(x, y)`.
 
+```python
+rect = pygame.Rect(100, 200, 100, 100)   # x=100, y=200, w=100, h=100
+```
 
+Common drawing functions (all take `surface` as first argument):
 
+```python
+pygame.draw.rect(DISPLAYSURF, red, rect)                 # rectangle
+pygame.draw.circle(DISPLAYSURF, yellow, (100, 600), 50)  # circle
+pygame.draw.line(DISPLAYSURF, colour, start_point, end_point)
+pygame.draw.polygon(DISPLAYSURF, colour, points, width)
+```
 
-events ===is handling inputs from keys and using a mouse 
+Rect `width` behaviour:
+- `width == 0` → filled rectangle
+- `width > 0` → line thickness
+- `width < 0` → draws nothing
 
-THERE ARE TWO TYPES OF MAIN EVENTS THATS MOUSEBUTTOWN DOWN AND KEYSDOWN
-        1.after using the loop to get events occuring on surface .... we use
-        2. event.type can either be : KEYDOWN (pressing of keys ) or MOUSEBUTTONDOWN
+See `basics/exe_1.py` and `basics/text.py` for drawing examples.
 
-THEN TO GET TEH SPECIFIC KEY TYPES TO BE USED we thn use #event.key 
-BUT TO GET THE MOUSE BUTTON CLICKED WE THEN USE : event_button
+## 5. Rects and click detection
 
-for event.key -- K_DOWN , K_UP , K_LEFT , K_RIGHT 
+Rects have helper methods, the most useful being `collidepoint(point)`:
 
-for event.button --  1(left click) , 2 (middle click) , 3(right click) , 4(scroll wheel up)  5, (scroll wheel down)
+```python
+answer_rect = pygame.Rect(200, 300, 400, 400)
 
+if event.button == 1 and answer_rect.collidepoint(event.pos):
+    print('rectangle has been clicked')
+else:
+    print('somewhere else is clicked')
+```
 
-but then remember that thats only the keys for the mouse what about the mouse position..... pygame then privides us with >>> event.pos
+`collidepoint(event.pos)` returns `True` when the click position falls inside the rectangle.
 
+See `basics/exe_1.py` and `basics/text.py`.
 
+## 6. Rendering text
 
-DRAWING SURFACES 
-when drawing it is good to keep the values of the surfaces to be drawn outside the loop for easier referencing 
+### Create a font
 
-so rectancle = pygame.rect(x-axis , y-axis , width , height)
-        >> note : width == 0   .... leads to filling the rect
-        >> note : width > 0 used for line thickness
-        >> note : width < 0 draws nothing
+```python
+font = pygame.font.Font(None, 38)   # font file path (None = default), size
+```
 
-drawing polygons : pygame.polygons(screen , colour , points , width)
-drawing circles : pygame.draw.circle(screen , colour , (x-axis , y-axis ) , radius)
-drawing lines : pygame.draw.line(screen , colour , staring_point , ending_point)
-etc 
+Pygame has no native fonts; pass a `.ttf`/`.otf` file path or `None` for the default.
 
+### Render text to a surface
 
+```python
+text = font.render('answer a', True, green)   # text, antialias, colour
+```
 
-rendering text messages
+This returns a new surface containing the rendered text.
 
-we need to make a font :
->>>> pygame.font.Font(type of font , size)
->>>> type of font is passsed as a file string ..... no native pygame fonts
->>>this creates the font that will be used for any text wanting to be rendered
+### Place text on screen
 
-rendering the text:
-    text = font.render('*desired text*' , antialiasing(input boolean) , colour)
-    this creates a new surface rendering the text
-    but the text is rendered into text format now we need to find a method to place it in the screen
+```python
+text_rect = text.get_rect(center = rect1.center)   # position the text
+DISPLAYSURF.blit(text, text_rect)                  # draw text surface onto display
+```
+
+`blit(source, dest)` draws one surface onto another at the given position.
+
+Full example (`basics/text.py`):
+
+```python
+DISPLAYSURF.fill(white)
+pygame.draw.rect(DISPLAYSURF, red, rect1)
+pygame.draw.rect(DISPLAYSURF, blue, rect2)
+pygame.draw.rect(DISPLAYSURF, green, rect3)
+pygame.draw.circle(DISPLAYSURF, yellow, (100, 600), 50)
+
+DISPLAYSURF.blit(text1, text1_rect)
+DISPLAYSURF.blit(text2, text2_rect)
+DISPLAYSURF.blit(text3, text3_rect)
+pygame.display.flip()
+```
+
+## 7. Game data — questions and answers
+
+`basics/dsa_game_logic.py` stores questions as a list of dictionaries:
+
+```python
+current_question = 0
+
+questions = [
+    {
+        'question': 'Kate went to the pet store to buy a ?',
+        'options': ['beach', 'bitch'],
+        'answer': 'bitch',
+    },
+    {
+        'question': "i need your ____ on this matter",
+        'options': ['advice', 'advise'],
+        'answer': 'advice',
+    },
+]
+```
+
+Keep question text, options, and the correct answer together so the game can look them up by `current_question`.
+
+## 8. File-by-file summary
+
+| File | What it demonstrates |
+|------|----------------------|
+| `basics/Game.py` | Minimal window, init, quit event loop |
+| `basics/exe_1.py` | Rectangles, colours, `collidepoint`, mouse clicks |
+| `basics/text.py` | Fonts, `render`, `blit`, shapes, multiple click targets |
+| `basics/rect.py` | `pygame.Rect`, keyboard + mouse events, `event.pos` |
+| `basics/key_handling.py` | `KEYDOWN` / `KEYUP`, arrow keys |
+| `basics/dsa_game_logic.py` | Question data as list of dictionaries |
+
+## 9. Quick checklist
+
+- [ ] Call `pygame.init()` before anything else.
+- [ ] Create the display surface with `set_mode`.
+- [ ] Run a `while running:` loop with an inner `for event in pygame.event.get():`.
+- [ ] Handle `pygame.QUIT` to set `running = False`.
+- [ ] Clear the screen each frame with `DISPLAYSURF.fill(colour)`.
+- [ ] Draw shapes / blit text.
+- [ ] Call `pygame.display.flip()` every frame.
+- [ ] Use `collidepoint(event.pos)` for click detection on rects.
+- [ ] Use `font.render()` + `get_rect()` + `blit()` for text.

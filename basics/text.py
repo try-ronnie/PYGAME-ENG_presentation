@@ -4,7 +4,7 @@ import pygame
 pygame.init()
 
 # create the display surface 
-DISPLAYSURF = pygame.display.set_mode((1000,1000))
+DISPLAYSURF = pygame.display.set_mode((1400,1400))
 
 #creating a font
 font = pygame.font.Font(None , 38) # this returns a font object
