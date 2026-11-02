@@ -2,6 +2,10 @@ import math
 import random
 import pygame
 
+
+
+#NOTE ALL FUNCTIONS I DEVELOPED FROM V2 ARE CARRIED AND INITIATED IN THE LOOP WITH NO NECESSARY IMPROVEMENTS MADE
+# THIS WILL BE THE FINAL VISUAL QUE
 pygame.init()
 
 # SCREEN
@@ -47,46 +51,110 @@ f_small = pygame.font.SysFont(SANS, 25, bold=True)
 # QUESTIONS
 questions = [
     {'question': "Kate went to the pet store to buy a new ___",
-     'options': ['beach', 'bitch', 'pitch'], 'answer': 'bitch',
-     'explanation': 'Bitch, in its non-slang use, means a female dog.'},
-    {'question': 'Kiptoo went to buy a new _____ to wear because of the cold',
-     'options': ['chaget', 'jacket', 'gasket'], 'answer': 'jacket',
-     'explanation': 'A jacket is an item of clothing worn to keep warm.'},
-    {'question': 'Harry went over to send his warm ____ to the family upon hearing the disaster',
-     'options': ['retards', 'regards', 'readers'], 'answer': 'regards',
-     'explanation': 'Regards are used to express good wishes or sympathy.'},
-    {'question': 'If you have any questions, please do not hesitate to _____ me',
-     'options': ['contract', 'contact', 'contrast'], 'answer': 'contact',
-     'explanation': 'Contact means to communicate or get in touch with someone.'},
-    {'question': 'Jane really needed _____ on how to move forward',
-     'options': ['advice', 'advise', 'add vice'], 'answer': 'advice',
-     'explanation': 'Advice is a noun referring to a recommendation. Advise is the verb.'},
-    {'question': 'The manager sent a company-wide email to give everyone a _______ about the deadline',
-     'options': ['gentle reminder', 'gental remainder', 'genital reminder'], 'answer': 'gentle reminder',
-     'explanation': 'A gentle reminder is a polite way of reminding someone about something.'},
-    {'question': 'My father sent me to the garden to pick up the ____ used for digging',
-     'options': ['hoe', 'hole', 'hone'], 'answer': 'hoe',
-     'explanation': 'A hoe is a gardening tool used for digging and cultivating soil.'},
-    {'question': 'During the pandemic, we were always told to ______ our hands',
-     'options': ['satanize', 'sanitize', 'santanize'], 'answer': 'sanitize',
-     'explanation': 'Sanitize means to clean something to reduce or eliminate germs.'},
-    {'question': 'Our uncle brought back a Christmas bag full of ______',
-     'options': ['treats', 'threats', 'krests'], 'answer': 'treats',
-     'explanation': 'Treats are enjoyable things such as sweets, snacks or small gifts.'},
-    {'question': 'I woke up today feeling so _____',
-     'options': ['gay', 'play', 'grade'], 'answer': 'gay',
-     'explanation': 'Gay can also mean feeling happy or cheerful.'},
-    {'question': 'You know I can _____ you clearly, right?',
-     'options': ['here', 'hear', 'where'], 'answer': 'hear',
-     'explanation': 'Hear means to perceive sound with your ears.'},
-    {'question': 'She jerked ____ the stuck drawer until it opened',
-     'options': ['off', 'at', 'upon'], 'answer': 'at',
-     'explanation': 'Jerk at means to make a sudden, sharp pulling movement.'},
-    {'question': 'Please review the bed______ before taking it home',
-     'options': ['sheet', 'shit', 'cheat'], 'answer': 'sheet',
-     'explanation': 'A sheet is a piece of bedding used to cover a mattress.'},
-]
+    'options': ['beach', 'bitch', 'pitch'], 'answer': 'bitch',
+    'explanation': 'Bitch, in its non-slang use, means a female dog.You almost thought of it huh'},
 
+    {'question': 'Kiptoo went to buy a new _____ to wear because of the cold',
+    'options': ['chaget', 'jacket', 'gasket'], 'answer': 'jacket',
+    'explanation': 'A jacket is an item of clothing worn to keep warm.'},
+
+    {'question': 'Harry went over to send his warm ____ to the family upon hearing the disaster',
+    'options': ['retards', 'regards', 'readers'], 'answer': 'regards',
+    'explanation': 'Regards are used to express good wishes or sympathy. Retards mean slow minded people'},
+
+    {'question': 'If you have any questions, please do not hesitate to _____ me',
+    'options': ['contract', 'contact', 'contrast'], 'answer': 'contact',
+    'explanation': 'Contact means to communicate or get in touch with someone.'},
+
+    {'question': 'Jane really needed _____ on how to move forward',
+    'options': ['advice', 'advise', 'add vice'], 'answer': 'advice',
+    'explanation': 'Advice is a noun referring to a recommendation. Advise is the verb.'},
+
+    {'question': 'The manager sent a company-wide email to give everyone a _______ about the deadline',
+    'options': ['gentle reminder', 'gental remainder', 'genital reminder'], 'answer': 'gentle reminder',
+    'explanation': 'A gentle reminder is a polite way of reminding someone about something. Genital reminder is for people with stis '},
+
+    {'question': 'My father sent me to the garden to pick up the ____ used for digging',
+    'options': ['hoe', 'hole', 'hone'], 'answer': 'hoe',
+    'explanation': 'A hoe is a gardening tool used for digging and cultivating soil.'},
+
+    {'question': 'During the pandemic, we were always told to ______ our hands',
+    'options': ['satanize', 'sanitize', 'santanize'], 'answer': 'sanitize',
+    'explanation': 'Sanitize means to clean something to reduce or eliminate germs.'},
+
+    {'question': 'Our uncle brought back a Christmas bag full of ______',
+    'options': ['treats', 'threats', 'krests'], 'answer': 'treats',
+    'explanation': 'Treats are enjoyable things such as sweets, snacks or small gifts. Well depending on your uncle'},
+
+    {'question': 'I woke up today feeling so _____',
+    'options': ['gay', 'play', 'grade'], 'answer': 'gay',
+    'explanation': 'Gay can also mean feeling happy or cheerful.Besides its slang usage which means Homo-sexual'},
+
+    {'question': 'You know I can _____ you clearly, right?',
+    'options': ['here', 'hear', 'where'], 'answer': 'hear',
+    'explanation': 'Hear means to perceive sound with your ears.'},
+
+    {'question': 'She jerked ____ the stuck drawer until it opened',
+    'options': ['off', 'at', 'upon'], 'answer': 'at',
+    'explanation': 'Jerk at means to make a sudden, sharp pulling movement. I will not explain the first one ... use common sense'},
+
+    {'question': 'Please review the bed______ before taking it home',
+    'options': ['sheet', 'shit', 'cheat'], 'answer': 'sheet',
+    'explanation': 'A sheet is a piece of bedding used to cover a mattress.'},
+
+    {'question': "In french we say ______ before eating",
+    'options': ['bone apple tea', 'boner apple tea', 'bon appetit'],
+    'answer': 'bon appetit',
+    'explanation': 'due to tik-tok brainrot , many forget the correct spelling which is bon appetit'
+    },
+
+    {'question': 'This is a ______ announcement from the private sector',
+    'options': ['pubic', 'public', 'garlic'],
+    'answer': 'public',
+    'explanation': 'Public is correct meaning general info meant for each and every person.'
+    },
+
+    {'question': 'we need a totally ______ third party to judge the company contest',
+    'options': ['uninterested', 'disinterested', 'ininterested'],
+    'answer': 'disinterested',
+    'explanation': 'disinterested - meaning a person who doesnt give two shits about the event... excuse my language ... some one completely bored for the occasion'
+    },
+
+    {'question': "we need to nip this problem ______",
+    'options': ['in the bud', 'in the butt', 'in a nut'],
+    'answer': 'in the bud',
+    'explanation': 'in the bud - we use this to mean halting a problem early , if you chose any other one you need Jesus!!!!'
+    },
+
+    {'question': 'He was arrested for committing ____ and battery',
+    'options': ['a salt', 'assert', 'assault'],
+    'answer': 'assault',
+    'explanation': 'assault to mean intentional hurting or causing another person to fear imminent physical harm'
+    },
+
+    {'question': 'The marsh is home to a unique , microscopic ______',
+    'options': ['orgasm', 'organs', 'organism'],
+    'answer': 'organism',
+    'explanation': 'An organism is any living individual animal , plant , or single-celled life. Mostly confused with orgasm (meaning is obvious) due to the forgetten letter   i'
+    },
+
+    {'question': 'In 2027 all kenyans must stand strong for the ______ to be held , to remove the current president',
+    'options': ['elections', 'erections', 'ejections'],
+    'answer': 'elections',
+    'explanation': 'elections - a practise held after sometime for the citizens to vote and choose their leaders'
+    },
+
+    {'question': 'He rode into the village sitting high upon his _____',
+    'options': ['ass', 'ahh', 'ash'],
+    'answer': 'ass',
+    'explanation': 'Historically, an ass is a donkey or a stubborn animal.'
+    },
+    {'question' : 'During an emergence , make sure to _____ all of us',  
+    'options' : ['ejaculate' , 'evacuate' , 'evaporate'],
+    'answer' : 'evacuate' , 
+    'explanation' : 'evacuate = to mean helping people to escape an endangered area'
+    }
+]
 GOOD_MSGS = ["Excellent! You got it right!", "Spot on! Well done!", "Correct! Nicely spelled!"]
 BAD_MSGS = ["Not quite, let's learn!", "Oops! Not this time.", "Good try! Here's the trick."]
 
@@ -119,7 +187,8 @@ def lerp(a, b, t):
 def ease_out(p):
     return 1 - (1 - p) ** 3
 
-
+# returning the colour schematic out
+# function definition to remain the same in version2
 def make_background():
     # Vertical gradient + a few faint gold circles, drawn once and reused every frame
     bg = pygame.Surface((W, H))
